@@ -1,18 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Info</title>
-</head>
-<body>
-    <h2>Product Information</h2>
+<label>Product Name: <?php echo isset($_POST["product_name"]) ? htmlspecialchars($_POST["product_name"]) : ""; ?></label><br>
+<label>Category: <?php echo isset($_POST["category"]) ? htmlspecialchars($_POST["category"]) : ""; ?></label><br>
+<label>Price: ₱<?php echo isset($_POST["price"]) ? number_format($_POST["price"], 2) : "0.00"; ?></label><br>
+<label>Stock Quantity: <?php echo isset($_POST["stock_quantity"]) ? htmlspecialchars($_POST["stock_quantity"]) : ""; ?></label><br>
 
-    <label>Product Name: <?php echo $_POST["product_name"]; ?></label><br>
-    <label>Category: <?php echo $_POST["category"]; ?></label><br>
-    <label>Price: ₱<?php echo number_format($_POST["price"], 2); ?></label><br>
-    <label>Stock Quantity: <?php echo $_POST["stock_quantity"]; ?></label><br>
-    <label>Expiration Date: <?php echo $_POST["expiration_date"]; ?></label><br>
-    <label>Status: <?php echo $_POST["status"]; ?></label><br>
-</body>
-</html>
+<?php
+    if (isset($_POST["expiration_date"])) {
+        $rawDate = $_POST["expiration_date"];
+        $formattedDate = date("M-d-Y", strtotime($rawDate));
+    } else {
+        $formattedDate = "";
+    }
+?>
+<label>Expiration Date: <?php echo htmlspecialchars($formattedDate); ?></label><br>
+
+<label>Status: <?php echo isset($_POST["status"]) ? htmlspecialchars($_POST["status"]) : ""; ?></label><br>
